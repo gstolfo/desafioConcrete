@@ -4,8 +4,9 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.concretesolutions.beans.Login;
-import br.com.concretesolutions.hibernate.IHibernateFactory;
+import br.com.concretesolutions.beans.LoginBean;
+import br.com.concretesolutions.hibernate.HibernateFactory;
+import br.com.concretesolutions.hibernate.StartHsqldb;
 import br.com.concretesolutions.uuid.IUUID;
 
 /**
@@ -15,18 +16,19 @@ import br.com.concretesolutions.uuid.IUUID;
  */
 
 public class CreateTablesInMemory implements InitializingBean{
-
-	@Autowired
-	IHibernateFactory hibernateFactory;
 	
 	@Autowired
 	IUUID uuidCreate; 	
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Session session = hibernateFactory.getSessionFactory();
 		
-		Login login = new Login();
+		//Start Service HSQLDB
+		//StartHsqldb.getInstance().startHsqldb();
+		
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		LoginBean login = new LoginBean();
 			
 		login.setId(uuidCreate.getUUID());
 		login.setEmail("stolfo@gmail.com");

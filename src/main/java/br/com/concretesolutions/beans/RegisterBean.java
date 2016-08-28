@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class Register {
+public class RegisterBean {
 	
 	@Id
 	@Column
@@ -26,7 +26,7 @@ public class Register {
 	private String email;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Phones phones;
+	private PhonesBean phones;
 	
 	
 	public String getId() {
@@ -47,10 +47,10 @@ public class Register {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Phones getPhones() {
+	public PhonesBean getPhones() {
 		return phones;
 	}
-	public void setPhones(Phones phones) {
+	public void setPhones(PhonesBean phones) {
 		this.phones = phones;
 	}
 	

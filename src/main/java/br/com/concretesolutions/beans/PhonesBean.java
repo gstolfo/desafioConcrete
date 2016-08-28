@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * @author guilhermeluizstolfo
  */
 @Entity
-public class Phones {
+public class PhonesBean {
 	
 	@Id
 	private Integer id;

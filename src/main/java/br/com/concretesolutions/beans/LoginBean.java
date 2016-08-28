@@ -10,7 +10,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Login {
+public class LoginBean {
 	
 	@Id
     @Column(length = 250)

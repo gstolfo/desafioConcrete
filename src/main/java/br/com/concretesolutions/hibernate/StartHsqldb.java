@@ -4,25 +4,42 @@ import java.io.IOException;
 
 import org.hsqldb.Server;
 import org.hsqldb.persist.HsqlProperties;
+import org.hsqldb.server.ServerProperties;
 import org.hsqldb.server.ServerAcl.AclFormatException;
 
+/**
+ * StartHsqldb
+ * @author guilhermeluizstolfo
+ *
+ */
 public class StartHsqldb {
 
-	/**
-	 * Start HSQLDB
-	 * @throws AclFormatException 
-	 * @throws IOException 
-	 */
+	private static StartHsqldb instance = null;
+	
 	public void startHsqldb() throws IOException, AclFormatException{
-        System.out.println("Starting Database");
+		
+		System.out.println("Starting Database");
         HsqlProperties p = new HsqlProperties();
         p.setProperty("server.database.0", "sss");
         p.setProperty("server.dbname.0", "sss");
         p.setProperty("server.port", "9001");
         Server server = new Server();
-        server.setProperties(p);
-        server.setLogWriter(null); 
-        server.setErrWriter(null); 
-        server.start();	    
+		//if(server.getState() != 1){
+        	server.getStateDescriptor();
+        	server.getState();
+        	server.getServerId();
+	        server.setProperties(p);
+	        server.setLogWriter(null); 
+	        server.setErrWriter(null); 
+	        server.start();	 
+		//}
+		
+	}
+	
+	public static StartHsqldb getInstance(){
+		if(instance == null){
+			instance = new StartHsqldb();
+		}
+		return instance;
 	}
 }
