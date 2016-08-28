@@ -2,17 +2,17 @@ package br.com.concretesolutions.uuid.impl;
 
 import java.util.UUID;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import br.com.concretesolutions.uuid.UUIDI;
+import br.com.concretesolutions.uuid.IUUID;
 
 /**
  * Class UUID generate
  * @author guilhermeluizstolfo
  *
  */
-@Service
-public class UUIDImpl implements UUIDI{
+@Repository
+public class UUIDImpl implements IUUID{
 	
 	public String getUUID(){
 		UUID uuid = UUID.randomUUID();

@@ -1,4 +1,4 @@
-package br.com.conretesolutions.hibernate;
+package br.com.concretesolutions.hsqldb;
 
 import java.io.IOException;
 

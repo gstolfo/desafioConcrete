@@ -5,25 +5,26 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.concretesolutions.beans.Login;
-import br.com.concretesolutions.uuid.UUIDI;
-import br.com.conretesolutions.hibernate.Hibernate;
+import br.com.concretesolutions.hibernate.IHibernateFactory;
+import br.com.concretesolutions.uuid.IUUID;
 
 /**
  * Create tables in memory
  * @author guilhermeluizstolfo
  *
  */
+
 public class CreateTablesInMemory implements InitializingBean{
 
-	
-	Hibernate hibernate = new Hibernate();
+	@Autowired
+	IHibernateFactory hibernateFactory;
 	
 	@Autowired
-	UUIDI uuidCreate; 
+	IUUID uuidCreate; 	
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Session session = hibernate.getSessionFactory();
+		Session session = hibernateFactory.getSessionFactory();
 		
 		Login login = new Login();
 			

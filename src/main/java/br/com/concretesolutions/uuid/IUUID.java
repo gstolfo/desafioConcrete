@@ -5,7 +5,7 @@ package br.com.concretesolutions.uuid;
  * @author guilhermeluizstolfo
  *
  */
-public interface UUIDI {
+public interface IUUID {
 
 	public String getUUID();
 }
