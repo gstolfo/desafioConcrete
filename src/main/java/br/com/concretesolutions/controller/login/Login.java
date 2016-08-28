@@ -9,7 +9,7 @@ public class Login {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void login() {
-	
+		
 	}
  
 }
