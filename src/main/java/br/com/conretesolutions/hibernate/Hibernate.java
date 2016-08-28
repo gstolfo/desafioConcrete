@@ -1,4 +1,4 @@
-package br.com.conretesolutions.database.hibernate;
+package br.com.conretesolutions.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
