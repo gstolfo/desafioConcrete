@@ -35,14 +35,7 @@ repositories {
     mavenCentral()
 }
 
-// Set source directory
-sourceSets {
-        main {
-            java {
-                srcDir 'src'
-            }
-        }
-    }
+
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
@@ -58,7 +51,9 @@ dependencies {
         "com.fasterxml.jackson.core:jackson-annotations:2.8.1",
         "com.fasterxml.jackson.core:jackson-core:2.8.1",
         "com.fasterxml.jackson.core:jackson-databind:2.8.1",
-        "hsqldb:hsqldb:1.8.0.10"        
+        "org.hsqldb:hsqldb:2.3.4",
+        "javax.servlet:javax.servlet-api:4.0.0-b01" 
+               
     )
     // dependencies to run on tomcat, are mandatory for tomcat plugin
     def tomcatVersion = '7.0.57'
