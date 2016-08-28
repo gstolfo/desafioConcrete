@@ -6,16 +6,43 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/3.0/userguide/tutorial_java_projects.html
  */
+buildscript {
+    repositories {
+        jcenter()
+    }
 
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'
+    }
+}
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+
+// JDK version source compatibility
+sourceCompatibility = 1.8
+// project version
+version = '1.0'
+// War file name
+war.baseName = 'desafioConcrete.war'
+// Web directory, this overrides the default value "webapp"
+project.webAppDirName = 'WebContent'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
     mavenCentral()
 }
+
+// Set source directory
+sourceSets {
+        main {
+            java {
+                srcDir 'src'
+            }
+        }
+    }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
@@ -24,6 +51,7 @@ dependencies {
         "org.springframework:spring-core:4.3.2.RELEASE",
         "org.springframework:spring-orm:4.3.2.RELEASE",
         "org.springframework:spring-tx:4.3.2.RELEASE",
+        "org.springframework:spring-webmvc:4.3.2.RELEASE",
         "org.hibernate:hibernate-core:5.2.2.Final",
         "junit:junit:4.12",
         "io.jsonwebtoken:jjwt:0.6.0",
@@ -32,4 +60,15 @@ dependencies {
         "com.fasterxml.jackson.core:jackson-databind:2.8.1",
         "hsqldb:hsqldb:1.8.0.10"        
     )
+    // dependencies to run on tomcat, are mandatory for tomcat plugin
+    def tomcatVersion = '7.0.57'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
 }
+
+// context where tomcat is deployed, by defautl localhost:8080/
+tomcatRun.contextPath = '/'
+tomcatRunWar.contextPath = '/'
