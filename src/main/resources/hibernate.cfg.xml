@@ -16,8 +16,9 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
  
-        <mapping class="br.com.concretesolutions.login.Task"></mapping>
- 
+        <mapping class="br.com.concretesolutions.beans.Login"></mapping>
+ 		<mapping class="br.com.concretesolutions.beans.Phones"></mapping>
+ 		<mapping class="br.com.concretesolutions.beans.Register"></mapping>
  
     </session-factory>
 </hibernate-configuration>
