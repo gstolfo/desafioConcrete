@@ -52,7 +52,8 @@ dependencies {
         "com.fasterxml.jackson.core:jackson-core:2.8.1",
         "com.fasterxml.jackson.core:jackson-databind:2.8.1",
         "org.hsqldb:hsqldb:2.3.4",
-        "javax.servlet:javax.servlet-api:4.0.0-b01" 
+        "javax.servlet:javax.servlet-api:4.0.0-b01",
+        "jstl:jstl:1.2" 
                
     )
     // dependencies to run on tomcat, are mandatory for tomcat plugin
