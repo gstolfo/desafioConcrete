@@ -1,11 +1,14 @@
 package br.com.concretesolutions.beans;
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
- * Class Register
+ * Bean Register
  * @author guilhermeluizstolfo
  *
  */
@@ -22,7 +25,7 @@ public class Register {
 	@Column
 	private String email;
 	
-	@Column
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Phones phones;
 	
 	

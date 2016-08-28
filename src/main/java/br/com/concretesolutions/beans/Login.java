@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Bean de Login
+ * Bean Login
+ * @author guilhermeluizstolfo
+ *
  */
 @Entity
 public class Login {
