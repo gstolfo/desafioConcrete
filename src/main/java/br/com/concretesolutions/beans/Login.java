@@ -13,20 +13,19 @@ import javax.persistence.Id;
 public class Login {
 	
 	@Id
-    @Column
-	private Integer id;
+    @Column(length = 250)
+	private String id;
 	
-	@Column
+	@Column(length = 250)
 	private String email;
 	
-	@Column
+	@Column(length = 250)
 	private String password;
 	
-	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getEmail() {
