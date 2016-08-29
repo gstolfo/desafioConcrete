@@ -44,6 +44,7 @@ public class RegisterDaoImpl implements RegisterDaoI {
 		Transaction tx = session.beginTransaction();
 
 		try {
+<<<<<<< HEAD
 			if (getByEmail(registerBean.getEmail()) == null) {
 				RegisterBean register = new RegisterBean();
 
@@ -78,6 +79,31 @@ public class RegisterDaoImpl implements RegisterDaoI {
 				tx.commit();
 			} else {
 				return RegisterDaoI.ERROR_EMAIL_EXISTS;
+=======
+			RegisterBean register = new RegisterBean();
+				
+			register.setId(uuidCreate.getUUID());
+			register.setName(registerBean.getName());
+			register.setEmail(registerBean.getEmail());
+			register.setPassword(registerBean.getPassword());
+			
+			List<PhoneBean> phonesRegisterList = registerBean.getPhones();
+			
+			List<PhoneBean> phonesBeanList = new ArrayList<PhoneBean>();
+			
+			//Get PhonesBeanRegisterList
+			if(phonesRegisterList != null && phonesRegisterList.size() != 0){
+				
+				for(PhoneBean phone : phonesRegisterList){
+					PhoneBean phonesBean = new PhoneBean();
+					
+					phonesBean.setId(uuidCreate.getUUID());
+					phonesBean.setDdd(phone.getDdd());
+					phonesBean.setNumber(phone.getNumber());
+					
+					phonesBeanList.add(phonesBean);	
+				}	
+>>>>>>> branch 'master' of git@github.com:gstolfo/desafioConcrete.git
 			}
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());
@@ -174,5 +200,82 @@ public class RegisterDaoImpl implements RegisterDaoI {
 
 		return RegisterBean;
 	}
+	
+	@Override
+	public List<RegisterBean> getAll() throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		List<RegisterBean> listRegisterBean = session.createCriteria(RegisterBean.class).list();
+		
+		return listRegisterBean;
+	}
+
+	@Override
+	public RegisterBean getById(String id) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		RegisterBean RegisterBean = session.get(RegisterBean.class, id);
+		
+		return RegisterBean;
+	}
+
+	@Override
+	public RegisterBean getByEmailAndPassword(String email, String password) throws IOException, AclFormatException {
+		
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(RegisterBean.class);
+		
+		crit.add(Restrictions.eq("email",email));
+		
+		crit.add(Restrictions.eq("password",password));
+
+		List<RegisterBean> list = crit.list();
+		
+		RegisterBean RegisterBean = null;
+		if(list != null && list.size() != 0){
+			 RegisterBean = (RegisterBean)list.get(0);
+		}
+		
+		return RegisterBean;
+		
+	}
+
+	@Override
+	public RegisterBean getByEmail(String email) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(RegisterBean.class);
+		
+		crit.add(Restrictions.like("email",email));
+		
+		List<RegisterBean> list = crit.list();
+		
+		RegisterBean RegisterBean = null;
+		if(list != null && list.size() != 0){
+			 RegisterBean = (RegisterBean)list.get(0);
+		}
+		
+		return RegisterBean;
+		
+	}
+
+	@Override
+	public RegisterBean getByPassword(String password) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(RegisterBean.class);
+		
+		crit.add(Restrictions.eq("password",password));
+		
+		List<RegisterBean> list = crit.list();
+		
+		RegisterBean RegisterBean = null;
+		if(list != null && list.size() != 0){
+			 RegisterBean = (RegisterBean)list.get(0);
+		}
+		
+		return RegisterBean;
+	}	
 
 }
