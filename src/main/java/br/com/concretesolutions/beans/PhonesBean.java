@@ -1,8 +1,13 @@
 package br.com.concretesolutions.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.hibernate.FetchMode;
 
 /**
  * Bean Phones
@@ -12,18 +17,23 @@ import javax.persistence.Id;
 public class PhonesBean {
 	
 	@Id
-	private Integer id;
+	@Column(length = 1000)
+	private String id;
 	
-	@Column
+	@Column(length=3)
 	private Integer ddd;
 	
-	@Column
+	@Column(length=9)
 	private String number;
 	
-	public Integer getId() {
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private RegisterBean registerBean;
+	
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Integer getDdd() {
@@ -38,5 +48,7 @@ public class PhonesBean {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	
+	
 		
 }

@@ -20,7 +20,9 @@ public class LoginDaoImpl implements LoginDaoI {
 	public List<LoginBean> getAll() throws IOException, AclFormatException {
 		Session session = HibernateFactory.getInstance().getSessionFactory();
 		
-		return session.createCriteria(LoginBean.class).list();
+		List<LoginBean> listLoginBean = session.createCriteria(LoginBean.class).list();
+		
+		return listLoginBean;
 	}
 
 	@Override

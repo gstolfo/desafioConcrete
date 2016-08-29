@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class LoginBean {
 	
 	@Id
-    @Column(length = 250)
+    @Column(length = 1000)
 	private String id;
 	
 	@Column(length = 250)

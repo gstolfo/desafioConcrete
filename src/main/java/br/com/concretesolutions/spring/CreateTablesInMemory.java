@@ -1,12 +1,12 @@
 package br.com.concretesolutions.spring;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.concretesolutions.beans.LoginBean;
 import br.com.concretesolutions.hibernate.HibernateFactory;
-import br.com.concretesolutions.hibernate.StartHsqldb;
 import br.com.concretesolutions.uuid.IUUID;
 
 /**
@@ -18,7 +18,7 @@ import br.com.concretesolutions.uuid.IUUID;
 public class CreateTablesInMemory implements InitializingBean{
 	
 	@Autowired
-	IUUID uuidCreate; 	
+	private IUUID uuidCreate; 	
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -27,18 +27,32 @@ public class CreateTablesInMemory implements InitializingBean{
 		//StartHsqldb.getInstance().startHsqldb();
 		
 		Session session = HibernateFactory.getInstance().getSessionFactory();
+		Transaction tx = session.beginTransaction();
 		
-		LoginBean login = new LoginBean();
+		try {
 			
-		login.setId(uuidCreate.getUUID());
-		login.setEmail("stolfo@gmail.com");
-		login.setPassword("123456");
-		
-		session.saveOrUpdate(login);		
-		
-		session.beginTransaction().commit();
-		
-		session.close();	
+			LoginBean login = new LoginBean();
+				
+			login.setId(uuidCreate.getUUID());
+			login.setEmail("stolfo@gmail.com");
+			login.setPassword("123456");
+			
+			session.saveOrUpdate(login);		
+			
+			tx.commit();
+			
+		} catch(RuntimeException e){
+			try {
+				tx.rollback();
+			} catch (RuntimeException rbe){
+				rbe.printStackTrace();
+			}
+			throw e;
+		} finally {
+			if(session != null){
+				session.close();
+			}
+		}
 	}
 
 }

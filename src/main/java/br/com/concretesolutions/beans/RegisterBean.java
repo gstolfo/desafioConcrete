@@ -1,11 +1,14 @@
 package br.com.concretesolutions.beans;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Bean Register
@@ -16,21 +19,20 @@ import javax.persistence.ManyToOne;
 public class RegisterBean {
 	
 	@Id
-	@Column
+	@Column(length = 10000)
 	private String id;
 	
-	@Column
+	@Column(length = 250)
 	private String name;
 	
-	@Column
+	@Column(length = 250)
 	private String email;
 	
-	@Column
+	@Column(length = 250)
 	private String password;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private PhonesBean phones;
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<PhonesBean> phones;
 	
 	public String getId() {
 		return id;
@@ -57,13 +59,10 @@ public class RegisterBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public PhonesBean getPhones() {
+	public List<PhonesBean> getPhones() {
 		return phones;
 	}
-	public void setPhones(PhonesBean phones) {
+	public void setPhones(List<PhonesBean> phones) {
 		this.phones = phones;
 	}
-	
-	
-	
 }
