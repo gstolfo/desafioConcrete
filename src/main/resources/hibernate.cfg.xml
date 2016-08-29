@@ -18,6 +18,7 @@
         
  		<mapping class="br.com.concretesolutions.beans.PhoneBean"></mapping>
  		<mapping class="br.com.concretesolutions.beans.RegisterBean"></mapping>
+  		<mapping class="br.com.concretesolutions.beans.RegisterDetailBean"></mapping>
  
     </session-factory>
 </hibernate-configuration>

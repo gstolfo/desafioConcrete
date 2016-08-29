@@ -1,6 +1,7 @@
 package br.com.concretesolutions.spring;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import br.com.concretesolutions.beans.PhoneBean;
 import br.com.concretesolutions.beans.RegisterBean;
+import br.com.concretesolutions.beans.RegisterDetailBean;
 import br.com.concretesolutions.hibernate.HibernateFactory;
+import br.com.concretesolutions.jwt.impl.JwtTokenI;
 import br.com.concretesolutions.uuid.IUUID;
 
 /**
@@ -24,6 +27,9 @@ public class CreateTablesInMemory implements InitializingBean{
 	
 	@Autowired
 	private IUUID uuidCreate; 	
+	
+	@Autowired
+	private JwtTokenI jwtToken;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -54,7 +60,19 @@ public class CreateTablesInMemory implements InitializingBean{
 			
 			register.setPhones(phoneBeanList);
 			
+			//RegisterDetail
+			RegisterDetailBean registerDetailBean = new RegisterDetailBean();
+			
+			registerDetailBean.setId(uuidCreate.getUUID());
+			registerDetailBean.setRegisterBean(register);
+			registerDetailBean.setCreated(new Date());
+			registerDetailBean.setModified(new Date());
+			registerDetailBean.setLast_login(new Date());
+			registerDetailBean.setToken(jwtToken.createTokenForUser(register));
+			
+			session.saveOrUpdate(registerDetailBean);
 			session.saveOrUpdate(register);		
+					
 			
 			tx.commit();
 			

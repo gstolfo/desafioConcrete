@@ -13,5 +13,7 @@ public interface JwtTokenI {
 	
 	public String createTokenForUser(RegisterBean registerBean);
 	
-	public void parseUserFromToken(String token);
+	public boolean parseUserFromToken(String token);
+	
+	 public boolean returnDateExpiration(String token);
 }

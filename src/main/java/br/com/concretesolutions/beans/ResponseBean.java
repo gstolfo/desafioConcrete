@@ -3,29 +3,26 @@ package br.com.concretesolutions.beans;
 import org.springframework.http.HttpStatus;
 
 public class ResponseBean<T> {
-	/*
-	public ResponseBean(HttpHeaders httpHeaders, HttpStatus httpStatus){
-		this.httpHeaders = httpHeaders;
-		this.httpStatus = httpStatus;
-	}
-	*/
+	
 	public ResponseBean(String mensagem, HttpStatus httpStatus, int codHttpStatus){
 		this.mensagem = mensagem;
 		this.httpStatus = httpStatus;
 		this.codHttpStatus = codHttpStatus;
 	}
 	
-	//private HttpHeaders httpHeaders;
+	public ResponseBean(String mensagem, HttpStatus httpStatus, int codHttpStatus, String token){
+		this.mensagem = mensagem;
+		this.httpStatus = httpStatus;
+		this.codHttpStatus = codHttpStatus;
+		this.token = token;
+	}
+	
+	
 	private HttpStatus httpStatus;
 	private String mensagem;
-	private int codHttpStatus; 
+	private int codHttpStatus;
+	private String token;
 	
-	/*public HttpHeaders getHttpHeaders() {
-		return httpHeaders;
-	}
-	public void setHttpHeaders(HttpHeaders httpHeaders) {
-		this.httpHeaders = httpHeaders;
-	}*/
 	public HttpStatus getHttpStatus() {
 		return httpStatus;
 	}
@@ -44,5 +41,10 @@ public class ResponseBean<T> {
 	public void setCodHttpStatus(int codHttpStatus) {
 		this.codHttpStatus = codHttpStatus;
 	}
-	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

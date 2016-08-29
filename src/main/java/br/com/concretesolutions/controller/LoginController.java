@@ -5,14 +5,18 @@ import java.io.IOException;
 import org.hsqldb.server.ServerAcl.AclFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.concretesolutions.beans.RegisterBean;
+import br.com.concretesolutions.beans.RegisterDetailBean;
 import br.com.concretesolutions.beans.ResponseBean;
+import br.com.concretesolutions.jwt.JWTTokenImpl;
+import br.com.concretesolutions.jwt.impl.JwtTokenI;
 import br.com.concretesolutions.pojo.Login;
+import br.com.concretesolutions.service.RegisterDetailServiceI;
 import br.com.concretesolutions.service.RegisterServiceI;
 
 /**
@@ -25,6 +29,12 @@ public class LoginController {
 
 	@Autowired
 	RegisterServiceI registerService;
+	
+	@Autowired
+	RegisterDetailServiceI registerDetailService;
+	
+	@Autowired
+	JwtTokenI jwtToken;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseBean<Login> login( @RequestBody Login login) throws IOException, AclFormatException {

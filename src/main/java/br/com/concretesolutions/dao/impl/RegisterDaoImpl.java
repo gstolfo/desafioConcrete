@@ -18,7 +18,6 @@ import br.com.concretesolutions.beans.RegisterBean;
 import br.com.concretesolutions.beans.RegisterDetailBean;
 import br.com.concretesolutions.dao.RegisterDaoI;
 import br.com.concretesolutions.hibernate.HibernateFactory;
-import br.com.concretesolutions.jwt.JWTTokenImpl;
 import br.com.concretesolutions.jwt.impl.JwtTokenI;
 import br.com.concretesolutions.uuid.IUUID;
 
@@ -36,7 +35,7 @@ public class RegisterDaoImpl implements RegisterDaoI {
 	private IUUID uuidCreate;
 
 	@Autowired
-	private JwtTokenI jwtToken = new JWTTokenImpl();
+	private JwtTokenI jwtToken;
 
 	@Override
 	public String register(RegisterBean registerBean) throws IOException, AclFormatException {
@@ -58,6 +57,7 @@ public class RegisterDaoImpl implements RegisterDaoI {
 								
 				//RegisterDetail
 				RegisterDetailBean registerDetailBean = new RegisterDetailBean();
+				registerDetailBean.setId(uuidCreate.getUUID());
 				registerDetailBean.setRegisterBean(register);
 				registerDetailBean.setCreated(new Date());
 				registerDetailBean.setModified(new Date());
@@ -185,6 +185,26 @@ public class RegisterDaoImpl implements RegisterDaoI {
 		List<RegisterBean> listRegisterBean = session.createCriteria(RegisterBean.class).list();
 		
 		return listRegisterBean;
+	}
+
+
+	@Override
+	public RegisterBean getRegisterBean(RegisterBean registerBean) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+
+		Criteria crit = session.createCriteria(RegisterBean.class);
+		
+		crit.add(Restrictions.eq("email", registerBean.getEmail()));
+		
+		crit.add(Restrictions.eq("email", registerBean.getPassword()));
+		
+		List<RegisterBean> list = crit.list();
+		
+		if(list != null && list.size() != 0){
+			return (RegisterBean)list.get(0);
+		}
+		
+		return null;
 	}
 
 }

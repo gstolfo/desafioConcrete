@@ -28,4 +28,6 @@ public interface RegisterDaoI {
 	public RegisterBean getByEmail(String email) throws IOException, AclFormatException;
 	
 	public RegisterBean getByPassword(String password) throws IOException, AclFormatException;
+	
+	public RegisterBean getRegisterBean(RegisterBean registerBean) throws IOException, AclFormatException;
 }

@@ -48,4 +48,9 @@ public class RegisterServiceImpl implements RegisterServiceI {
 		return registerDao.getByPassword(password);
 	}
 
+	@Override
+	public RegisterBean getRegisterBean(RegisterBean registerBean) throws IOException, AclFormatException {
+		return registerDao.getRegisterBean(registerBean);
+	}
+
 }

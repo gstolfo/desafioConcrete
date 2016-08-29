@@ -1,5 +1,7 @@
 package br.com.concretesolutions.jwt;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.stereotype.Repository;
@@ -10,7 +12,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.TextCodec;
 
 /**
  * JWTToken
@@ -19,15 +20,6 @@ import io.jsonwebtoken.impl.TextCodec;
  */
 @Repository
 public class JWTTokenImpl implements JwtTokenI{
-	
-	/*
-	public static void main(String args[]){
-		JWTToken jwtToken = new JWTToken();
-		String token = jwtToken.createTokenForUser();
-		System.out.println(token);
-		jwtToken.parseUserFromToken(token);
-	}
-	*/
 	
 	public String createTokenForUser(RegisterBean registerBean) {
 				
@@ -47,16 +39,49 @@ public class JWTTokenImpl implements JwtTokenI{
 		
 		//Signature
 		.signWith(SignatureAlgorithm.HS256, JwtTokenI.SECRET).compact();
+		
+		
 	}
 	
-	public void parseUserFromToken(String token) {
-		Jws<Claims> jws = Jwts.parser().setSigningKey(JwtTokenI.SECRET).parseClaimsJws(token);
+	public boolean parseUserFromToken(String token) {
 		
-		System.out.println(jws.getBody().getId());
-		System.out.println(jws.getBody().getIssuer());
-		System.out.println(jws.getBody().getSubject());
-		System.out.println(jws.getBody().getExpiration());	
-		
-		System.out.println(TextCodec.BASE64.decode(jws.getSignature()));
+		try{
+			Jws<Claims> jws = Jwts.parser().setSigningKey(JwtTokenI.SECRET).parseClaimsJws(token); // valid expiration
+			
+			if( jws.getBody().getId() != null && 
+					jws.getBody().getIssuer() != null && 
+					jws.getBody().getSubject() != null && 
+					jws.getBody().getExpiration() != null && 
+					jws.getBody().getIssuedAt() != null &&
+					jws.getSignature() != null){
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Throwable e) {
+			return false;
+		}
 	}
+	
+   public boolean returnDateExpiration(String token) {
+		
+		try{
+			Jws<Claims> jws = Jwts.parser().setSigningKey(JwtTokenI.SECRET).parseClaimsJws(token); // valid expiration
+			
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("mm");
+			int minute = new Integer(sdf.format(jws.getBody().getExpiration()));
+			
+			if(minute > 30){
+				return false;
+			}
+			return true;
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+   
 }

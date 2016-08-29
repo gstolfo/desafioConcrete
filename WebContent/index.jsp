@@ -4,38 +4,36 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Desafio Concrete Solutions</title>
-<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
-
-
-</head>
-<body>
-<script type="text/javascript" >
-$(document).ready(function(){  
-
-    $('#sign').click(function(){  
-        $.ajax({  
-            url:"http://localhost:8181/desafioConcrete/login",  
-            type:"post",  
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                email:$("#email").val(),
-                password:$("#password").val()
-            }), 
-            success: function(data){
-            	var json = JSON.stringify(data);
-            	var obj = $.parseJSON(json);
-            	
-            	if(obj["httpStatus"] === "OK" && obj["codHttpStatus"] === 200){
-            		window.location.href="secure.jsp";
-            	}
-            	   
-            }
-        });  
-    });  
-}); 
-</script>
+		<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+		<title>Desafio Concrete Solutions</title>		
+	</head>
+	<body>
+	<script type="text/javascript" >
+		$(document).ready(function(){  
+		    $('#sign').click(function(){  
+		        $.ajax({  
+		            url:"http://localhost:8181/desafioConcrete/login",  
+		            type:"post",  
+		            dataType: "json",
+		            contentType: 'application/json',
+		            data: JSON.stringify({
+		                email:$("#email").val(),
+		                password:$("#password").val()
+		            }), 
+		            success: function(data){
+		            	var json = JSON.stringify(data);
+		            	var obj = $.parseJSON(json);
+		            	
+		            	if(obj["httpStatus"] === "OK" && obj["codHttpStatus"] === 200){
+		            		
+		            		window.location.href="secure.jsp?token="+obj["token"];
+		            	}
+		            	   
+		            }
+		        });  
+		    });  
+		}); 
+	</script>
 	Desafio Concrete Solutions
 	<form method="POST" action="login">
 		<table cellpadding="0" cellspacing="0" border="0" >
