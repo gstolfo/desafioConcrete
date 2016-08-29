@@ -32,7 +32,7 @@ public class RegisterBean {
 	private String password;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<PhonesBean> phones;
+	private List<PhoneBean> phones;
 	
 	public String getId() {
 		return id;
@@ -59,10 +59,10 @@ public class RegisterBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<PhonesBean> getPhones() {
+	public List<PhoneBean> getPhones() {
 		return phones;
 	}
-	public void setPhones(List<PhonesBean> phones) {
+	public void setPhones(List<PhoneBean> phones) {
 		this.phones = phones;
 	}
 }

@@ -14,7 +14,7 @@ import org.hibernate.FetchMode;
  * @author guilhermeluizstolfo
  */
 @Entity
-public class PhonesBean {
+public class PhoneBean {
 	
 	@Id
 	@Column(length = 1000)

@@ -1,25 +1,15 @@
-package br.com.concretesolutions.beans;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+package br.com.concretesolutions.pojo;
 
 /**
  * Bean Login
  * @author guilhermeluizstolfo
  *
  */
-@Entity
-public class LoginBean {
-	
-	@Id
-    @Column(length = 1000)
+
+public class Login {
+
 	private String id;
-	
-	@Column(length = 250)
 	private String email;
-	
-	@Column(length = 250)
 	private String password;
 	
 	public String getId() {
