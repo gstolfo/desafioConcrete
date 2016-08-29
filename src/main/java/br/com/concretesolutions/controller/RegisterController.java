@@ -1,6 +1,7 @@
 package br.com.concretesolutions.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.hsqldb.server.ServerAcl.AclFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class RegisterController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseBean<RegisterBean> register( @RequestBody RegisterBean registerBean) throws IOException, AclFormatException {
+		
+		List<RegisterBean>  list = registerService.getAll();
+		
 		
 		String resultMsg = registerService.register(registerBean);
 		

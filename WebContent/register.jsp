@@ -12,18 +12,25 @@
 <body>
 <script type="text/javascript" >
 $(document).ready(function(){  
-
-    $('#add').click(function(){  
+	
+    $('#add').click(function(){
+    	
+         var obj = {}; 
+         var phones = [{"ddd":$("#ddd").val(),"number":$("#number").val()}];
+         
+    	 obj["name"] = $("#name").val(),
+    	 obj["email"] = $("#email").val(),
+    	 obj["password"] = $("#password").val(),
+    	 obj["phones"] = phones;
+         
+    	var json = JSON.stringify(obj); 
+   
         $.ajax({  
             url:"http://localhost:8181/desafioConcrete/register",  
             type:"post",  
             dataType: "json",
             contentType: 'application/json',
-            data: JSON.stringify({
-                name:$("#name").val(),
-                email:$("#email").val()
-                
-            }), 
+            data: json
         });  
     });  
 }); 
@@ -44,7 +51,7 @@ $(document).ready(function(){
 					Email:
 				</td>
 				<td>
-					<input type="email" name="email" id="email" />
+					<input type="text" name="email" id="email" />
 				</td>
 		    </tr>
 		    <tr>
@@ -60,7 +67,7 @@ $(document).ready(function(){
 					DDD:
 				</td>
 				<td>
-					<input type="password" name="ddd" id="ddd" maxlength="3" />
+					<input type="text" name="ddd" id="ddd" maxlength="3" />
 				</td>
 		    </tr>
 		    <tr>
@@ -68,7 +75,7 @@ $(document).ready(function(){
 					Number:
 				</td>
 				<td>
-					<input type="password" name="number" id="number" maxlength="9" />
+					<input type="text" name="number" id="number" maxlength="9" />
 				</td>
 		    </tr>
 		    <tr>

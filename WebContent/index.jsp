@@ -51,7 +51,7 @@ $(document).ready(function(){
 		    </tr>
 		    <tr>
 		    	<td>
-		    		<a href="cadastrar.jsp">Cadastrar</a>
+		    		<a href="register.jsp">Cadastrar</a>
 		    	</td>
 		    	<td align="right">
 		    		<input type="button" id="sign" value="Sign" />

@@ -20,7 +20,6 @@ import br.com.concretesolutions.service.RegisterServiceI;
  * @author guilhermeluizstolfo
  *
  */
-@Repository
 @RestController
 public class LoginController {
 
