@@ -17,8 +17,8 @@ import br.com.concretesolutions.uuid.IUUID;
 
 public class CreateTablesInMemory implements InitializingBean{
 	
-	//@Autowired
-	//IUUID uuidCreate; 	
+	@Autowired
+	IUUID uuidCreate; 	
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -30,11 +30,11 @@ public class CreateTablesInMemory implements InitializingBean{
 		
 		LoginBean login = new LoginBean();
 			
-		//login.setId(uuidCreate.getUUID());
+		login.setId(uuidCreate.getUUID());
 		login.setEmail("stolfo@gmail.com");
 		login.setPassword("123456");
 		
-		session.save(login);		
+		session.saveOrUpdate(login);		
 		
 		session.beginTransaction().commit();
 		

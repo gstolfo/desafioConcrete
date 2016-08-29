@@ -46,7 +46,7 @@ public class LoginDaoImpl implements LoginDaoI {
 		List<LoginBean> list = crit.list();
 		
 		LoginBean loginBean = null;
-		if(list != null){
+		if(list != null && list.size() != 0){
 			 loginBean = (LoginBean)list.get(0);
 		}
 		
@@ -60,12 +60,12 @@ public class LoginDaoImpl implements LoginDaoI {
 		
 		Criteria crit = session.createCriteria(LoginBean.class);
 		
-		crit.add(Restrictions.eq("email",email));
+		crit.add(Restrictions.like("email",email));
 		
 		List<LoginBean> list = crit.list();
 		
 		LoginBean loginBean = null;
-		if(list != null){
+		if(list != null && list.size() != 0){
 			 loginBean = (LoginBean)list.get(0);
 		}
 		
@@ -84,7 +84,7 @@ public class LoginDaoImpl implements LoginDaoI {
 		List<LoginBean> list = crit.list();
 		
 		LoginBean loginBean = null;
-		if(list != null){
+		if(list != null && list.size() != 0){
 			 loginBean = (LoginBean)list.get(0);
 		}
 		
