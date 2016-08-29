@@ -1,4 +1,4 @@
-package br.com.concretesolutions.controller.login;
+package br.com.concretesolutions.controller;
 
 import java.io.IOException;
 
