@@ -2,6 +2,7 @@ package br.com.concretesolutions.dao.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.concretesolutions.beans.PhoneBean;
 import br.com.concretesolutions.beans.RegisterBean;
+import br.com.concretesolutions.beans.RegisterDetailBean;
 import br.com.concretesolutions.dao.RegisterDaoI;
 import br.com.concretesolutions.hibernate.HibernateFactory;
 import br.com.concretesolutions.jwt.JWTTokenImpl;
@@ -45,14 +47,23 @@ public class RegisterDaoImpl implements RegisterDaoI {
 
 		try {
 			if (getByEmail(registerBean.getEmail()) == null) {
+				
+				//Register
 				RegisterBean register = new RegisterBean();
 
 				register.setId(uuidCreate.getUUID());
 				register.setName(registerBean.getName());
 				register.setEmail(registerBean.getEmail());
 				register.setPassword(registerBean.getPassword());
-				register.setToken(jwtToken.createTokenForUser(registerBean));
-
+								
+				//RegisterDetail
+				RegisterDetailBean registerDetailBean = new RegisterDetailBean();
+				registerDetailBean.setRegisterBean(register);
+				registerDetailBean.setCreated(new Date());
+				registerDetailBean.setModified(new Date());
+				registerDetailBean.setLast_login(new Date());
+				registerDetailBean.setToken(jwtToken.createTokenForUser(registerBean));
+				
 				List<PhoneBean> phonesRegisterList = registerBean.getPhones();
 
 				List<PhoneBean> phonesBeanList = new ArrayList<PhoneBean>();

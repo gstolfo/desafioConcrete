@@ -34,9 +34,6 @@ public class RegisterBean {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<PhoneBean> phones;
 	
-	@Column(length=10000)
-	private String token;
-	
 	public String getId() {
 		return id;
 	}
@@ -66,11 +63,5 @@ public class RegisterBean {
 	}
 	public void setPhones(List<PhoneBean> phones) {
 		this.phones = phones;
-	}
-	public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
 	}
 }

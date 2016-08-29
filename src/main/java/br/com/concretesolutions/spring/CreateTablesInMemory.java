@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.concretesolutions.beans.PhoneBean;
 import br.com.concretesolutions.beans.RegisterBean;
@@ -18,7 +19,7 @@ import br.com.concretesolutions.uuid.IUUID;
  * @author guilhermeluizstolfo
  *
  */
-
+@Repository
 public class CreateTablesInMemory implements InitializingBean{
 	
 	@Autowired
