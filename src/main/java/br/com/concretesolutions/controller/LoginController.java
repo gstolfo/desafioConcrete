@@ -26,15 +26,15 @@ public class LoginController {
 	RegisterServiceI registerService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseBean<Login> login( @RequestBody Login Login) throws IOException, AclFormatException {
+	public ResponseBean<Login> login( @RequestBody Login login) throws IOException, AclFormatException {
 		
-		if(registerService.getByEmail(Login.getEmail()) != null){
+		if(registerService.getByEmail(login.getEmail()) != null){
 		
-			if(Login.getEmail() != null && !Login.getEmail().isEmpty()){
+			if(login.getEmail() != null && !login.getEmail().isEmpty()){
 				
-				if( registerService.getByPassword(Login.getPassword() ) != null && !Login.getPassword().isEmpty() ){
+				if( registerService.getByPassword(login.getPassword() ) != null && !login.getPassword().isEmpty() ){
 				
-					if(registerService.getByEmailAndPassword(Login.getEmail(), Login.getPassword()) != null){
+					if(registerService.getByEmailAndPassword(login.getEmail(), login.getPassword()) != null){
 						return new ResponseBean<Login>("Logado", HttpStatus.OK, HttpStatus.OK.value());	
 					} else {
 						return new ResponseBean<Login>("Usuário e/ou senha inválidos", HttpStatus.UNAUTHORIZED,  HttpStatus.UNAUTHORIZED.value());
