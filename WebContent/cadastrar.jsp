@@ -60,7 +60,7 @@ $(document).ready(function(){
 					DDD:
 				</td>
 				<td>
-					<input type="password" name="ddd" id="ddd" />
+					<input type="password" name="ddd" id="ddd" maxlength="3" />
 				</td>
 		    </tr>
 		    <tr>
@@ -68,7 +68,7 @@ $(document).ready(function(){
 					Number:
 				</td>
 				<td>
-					<input type="password" name="number" id="number" />
+					<input type="password" name="number" id="number" maxlength="9" />
 				</td>
 		    </tr>
 		    <tr>

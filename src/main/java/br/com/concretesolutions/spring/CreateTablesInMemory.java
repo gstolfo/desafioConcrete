@@ -1,11 +1,15 @@
 package br.com.concretesolutions.spring;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.concretesolutions.beans.LoginBean;
+import br.com.concretesolutions.beans.PhoneBean;
+import br.com.concretesolutions.beans.RegisterBean;
 import br.com.concretesolutions.hibernate.HibernateFactory;
 import br.com.concretesolutions.uuid.IUUID;
 
@@ -31,17 +35,31 @@ public class CreateTablesInMemory implements InitializingBean{
 		
 		try {
 			
-			LoginBean login = new LoginBean();
+			RegisterBean register = new RegisterBean();
 				
-			login.setId(uuidCreate.getUUID());
-			login.setEmail("stolfo@gmail.com");
-			login.setPassword("123456");
+			register.setId(uuidCreate.getUUID());
+			register.setName("Guilherme Luiz Stolfo");
+			register.setEmail("stolfo@gmail.com");
+			register.setPassword("123456");
 			
-			session.saveOrUpdate(login);		
+			List<PhoneBean> phoneBeanList =new ArrayList<PhoneBean>();
+			
+			PhoneBean phoneBean = new PhoneBean();
+			phoneBean.setId(uuidCreate.getUUID());
+			phoneBean.setDdd(11);
+			phoneBean.setNumber("992483773");
+			
+			phoneBeanList.add(phoneBean);
+			
+			register.setPhones(phoneBeanList);
+			
+			session.saveOrUpdate(register);		
 			
 			tx.commit();
 			
 		} catch(RuntimeException e){
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			try {
 				tx.rollback();
 			} catch (RuntimeException rbe){

@@ -15,9 +15,8 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
- 
-        <mapping class="br.com.concretesolutions.beans.LoginBean"></mapping>
- 		<mapping class="br.com.concretesolutions.beans.PhonesBean"></mapping>
+        
+ 		<mapping class="br.com.concretesolutions.beans.PhoneBean"></mapping>
  		<mapping class="br.com.concretesolutions.beans.RegisterBean"></mapping>
  
     </session-factory>
