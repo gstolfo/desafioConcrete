@@ -25,6 +25,9 @@ public class RegisterBean {
 	@Column
 	private String email;
 	
+	@Column
+	private String password;
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private PhonesBean phones;
 	
@@ -46,6 +49,13 @@ public class RegisterBean {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public PhonesBean getPhones() {
 		return phones;
