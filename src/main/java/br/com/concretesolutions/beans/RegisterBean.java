@@ -33,12 +33,9 @@ public class RegisterBean {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<PhoneBean> phones;
-<<<<<<< HEAD
 	
 	@Column(length=10000)
 	private String token;
-=======
->>>>>>> branch 'master' of git@github.com:gstolfo/desafioConcrete.git
 	
 	public String getId() {
 		return id;
@@ -76,5 +73,4 @@ public class RegisterBean {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
 }
