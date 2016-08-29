@@ -23,14 +23,28 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public void login( @RequestBody LoginBean request) throws IOException, AclFormatException {
 		
+		String id = "";
+
 		
-		List<LoginBean> list = loginService.getAll();
+		if(loginService.getByEmail(request.getEmail()) != null){
 		
-		LoginBean loginBean = new LoginBean();
-		
-		//loginBean.setEmail();
-		
-		
+			if(request.getEmail() != null && !request.getEmail().isEmpty()){
+				
+				if( loginService.getByPassword(request.getPassword() ) != null && !request.getPassword().isEmpty() ){
+				
+					if(loginService.getByEmailAndPassword(request.getEmail(), request.getPassword()) != null){
+						//Get LoginBean
+						LoginBean loginBean = loginService.getById(id);
+					} else {
+						System.out.println("Usuario ou senha Invalido");
+					}
+				} else {
+					System.out.println("Usuario ou senha Invalido");
+				}
+			}
+		} else{
+			System.out.println("Usuario ou senha Invalido");
+		}
 		
 		
 	}

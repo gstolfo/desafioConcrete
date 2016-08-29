@@ -16,4 +16,11 @@ public interface LoginServiceI {
 	
 	public List<LoginBean> getAll() throws IOException, AclFormatException;
 	
+	public LoginBean getById(String id) throws IOException, AclFormatException;
+	
+	public LoginBean getByEmailAndPassword(String email, String password) throws IOException, AclFormatException;
+	
+	public LoginBean getByEmail(String email) throws IOException, AclFormatException;
+	
+	public LoginBean getByPassword(String password) throws IOException, AclFormatException;
 }

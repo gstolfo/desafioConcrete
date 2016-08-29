@@ -27,4 +27,28 @@ public class LoginServiceImpl implements LoginServiceI {
 		return loginDao.getAll();
 	}
 
+	@Override
+	public LoginBean getById(String id) throws IOException, AclFormatException {
+		
+		return loginDao.getById(id);
+	}
+
+	@Override
+	public LoginBean getByEmailAndPassword(String email, String password) throws IOException, AclFormatException {
+		return loginDao.getByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public LoginBean getByEmail(String email) throws IOException, AclFormatException {
+		return loginDao.getByEmail(email);
+	}
+
+	@Override
+	public LoginBean getByPassword(String password) throws IOException, AclFormatException {
+		return loginDao.getByPassword(password);
+	}
+	
+	
+	
+
 }

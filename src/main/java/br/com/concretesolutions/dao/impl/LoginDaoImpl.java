@@ -3,7 +3,9 @@ package br.com.concretesolutions.dao.impl;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.hsqldb.server.ServerAcl.AclFormatException;
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +23,72 @@ public class LoginDaoImpl implements LoginDaoI {
 		return session.createCriteria(LoginBean.class).list();
 	}
 
+	@Override
+	public LoginBean getById(String id) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		LoginBean loginBean = session.get(LoginBean.class, id);
+		
+		return loginBean;
+	}
+
+	@Override
+	public LoginBean getByEmailAndPassword(String email, String password) throws IOException, AclFormatException {
+		
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(LoginBean.class);
+		
+		crit.add(Restrictions.eq("email",email));
+		
+		crit.add(Restrictions.eq("password",password));
+
+		List<LoginBean> list = crit.list();
+		
+		LoginBean loginBean = null;
+		if(list != null){
+			 loginBean = (LoginBean)list.get(0);
+		}
+		
+		return loginBean;
+		
+	}
+
+	@Override
+	public LoginBean getByEmail(String email) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(LoginBean.class);
+		
+		crit.add(Restrictions.eq("email",email));
+		
+		List<LoginBean> list = crit.list();
+		
+		LoginBean loginBean = null;
+		if(list != null){
+			 loginBean = (LoginBean)list.get(0);
+		}
+		
+		return loginBean;
+		
+	}
+
+	@Override
+	public LoginBean getByPassword(String password) throws IOException, AclFormatException {
+		Session session = HibernateFactory.getInstance().getSessionFactory();
+		
+		Criteria crit = session.createCriteria(LoginBean.class);
+		
+		crit.add(Restrictions.eq("password",password));
+		
+		List<LoginBean> list = crit.list();
+		
+		LoginBean loginBean = null;
+		if(list != null){
+			 loginBean = (LoginBean)list.get(0);
+		}
+		
+		return loginBean;
+	}	
+	
 }
