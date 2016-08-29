@@ -23,7 +23,13 @@ public class RegisterController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseBean<RegisterBean> register( @RequestBody RegisterBean registerBean) throws IOException, AclFormatException {
 		
-		registerService.register(registerBean);
+		String resultMsg = registerService.register(registerBean);
+		
+		if(resultMsg.equals("success")){
+			return new ResponseBean<RegisterBean>("Registrado com Sucesso!", HttpStatus.OK, HttpStatus.OK.value());
+		} else if(resultMsg.equals("error_email_exists")){
+			return new ResponseBean<RegisterBean>("E-mail já existente", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
+		}
 		
 		return new ResponseBean<RegisterBean>("", HttpStatus.OK, HttpStatus.OK.value());
 	}

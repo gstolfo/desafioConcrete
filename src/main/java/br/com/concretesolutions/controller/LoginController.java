@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.hsqldb.server.ServerAcl.AclFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import br.com.concretesolutions.service.RegisterServiceI;
  * @author guilhermeluizstolfo
  *
  */
+@Repository
 @RestController
 public class LoginController {
 

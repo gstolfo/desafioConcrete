@@ -1,44 +1,56 @@
 package br.com.concretesolutions.jwt;
 
-import java.time.Instant;
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
+import br.com.concretesolutions.beans.RegisterBean;
+import br.com.concretesolutions.jwt.impl.JwtTokenI;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.TextCodec;
 
-public class JWTToken {
+/**
+ * JWTToken
+ * @author guilhermeluizstolfo
+ *
+ */
+@Repository
+public class JWTTokenImpl implements JwtTokenI{
 	
-	
-	
+	/*
 	public static void main(String args[]){
 		JWTToken jwtToken = new JWTToken();
-		
-		
 		String token = jwtToken.createTokenForUser();
 		System.out.println(token);
 		jwtToken.parseUserFromToken(token);
 	}
+	*/
 	
-	
-	public String createTokenForUser() {
+	public String createTokenForUser(RegisterBean registerBean) {
+				
+		//Builder
 		return Jwts.builder()
-				.setId("15")
-				.setIssuer("login")
-				.setSubject("gstolfo")
-				// Fri Jun 24 2016 15:33:42 GMT-0400 (EDT)
-				  .setIssuedAt(Date.from(Instant.ofEpochSecond(1466796822L)))
-				  // Sat Jun 24 2116 15:33:42 GMT-0400 (EDT)
-				  .setExpiration(Date.from(Instant.ofEpochSecond(4622470422L)))
-				.claim("name", "Micah Silverman")
-				.claim("scope", "admins")
-				.signWith(SignatureAlgorithm.HS256, "REDSPARK_SECRET").compact();
+		
+		//Header
+		.setId(registerBean.getId())
+		.setIssuer("register")
+		.setSubject(registerBean.getEmail())
+		.setIssuedAt(new Date())
+		.setExpiration(new Date())
+		
+		//Payload
+		.claim("name", registerBean.getName())
+		.claim("scope", "user")
+		
+		//Signature
+		.signWith(SignatureAlgorithm.HS256, JwtTokenI.SECRET).compact();
 	}
 	
 	public void parseUserFromToken(String token) {
-		Jws<Claims> jws = Jwts.parser().setSigningKey("REDSPARK_SECRET").parseClaimsJws(token);
+		Jws<Claims> jws = Jwts.parser().setSigningKey(JwtTokenI.SECRET).parseClaimsJws(token);
 		
 		System.out.println(jws.getBody().getId());
 		System.out.println(jws.getBody().getIssuer());

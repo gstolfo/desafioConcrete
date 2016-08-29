@@ -13,6 +13,10 @@ import br.com.concretesolutions.beans.RegisterBean;
  *
  */
 public interface RegisterDaoI {
+	
+	public static final String ERROR_EMAIL_EXISTS = "error_email_exists";
+	public static final String SUCCESS = "success";
+	
 	public String register(RegisterBean registerBean) throws IOException, AclFormatException ;
 
 	public List<RegisterBean> getAll() throws IOException, AclFormatException;
