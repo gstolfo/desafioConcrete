@@ -14,7 +14,11 @@ import br.com.concretesolutions.beans.LoginBean;
 import br.com.concretesolutions.beans.ResponseBean;
 import br.com.concretesolutions.service.LoginServiceI;
 
-
+/**
+ * LoginController
+ * @author guilhermeluizstolfo
+ *
+ */
 @RestController
 public class LoginController {
 
@@ -23,10 +27,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseBean<LoginBean> login( @RequestBody LoginBean request) throws IOException, AclFormatException {
-		
-		String id = "";
 
-		
 		if(loginService.getByEmail(request.getEmail()) != null){
 		
 			if(request.getEmail() != null && !request.getEmail().isEmpty()){

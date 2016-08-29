@@ -47,7 +47,13 @@ $(document).ready(function(){
 				</td>
 		    </tr>
 		    <tr>
-		    	<td colspan="2" align="right">
+		    	<td colspan="2" height="10px"></td>
+		    </tr>
+		    <tr>
+		    	<td>
+		    		<a href="cadastrar.jsp">Cadastrar</a>
+		    	</td>
+		    	<td align="right">
 		    		<input type="button" id="sign" value="Sign" />
 		    	</td>
 		    </tr>
