@@ -23,6 +23,15 @@ $(document).ready(function(){
                 email:$("#email").val(),
                 password:$("#password").val()
             }), 
+            success: function(data){
+            	var json = JSON.stringify(data);
+            	var obj = $.parseJSON(json);
+            	
+            	if(obj["httpStatus"] === "OK" && obj["codHttpStatus"] === 200){
+            		window.location.href="secure.jsp";
+            	}
+            	   
+            }
         });  
     });  
 }); 
